@@ -31,7 +31,6 @@
             text-align: center; z-index: 10; position: relative; max-height: 90vh; overflow-y: auto;
         }
 
-        /* Pages & Transitions */
         .page { display: none; animation: fadeIn 0.8s ease forwards; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -39,7 +38,6 @@
         h1, h2, h3 { font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #1a1a1a; }
         p { line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
 
-        /* Premium Buttons */
         .btn {
             background: var(--gold); color: white; padding: 14px 28px; border: none;
             border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.4s;
@@ -48,7 +46,6 @@
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5); }
 
-        /* Custom Modal Box */
         #customModal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 100; display: none;
@@ -57,11 +54,10 @@
         .modal-content {
             background: white; width: 90%; max-width: 450px; padding: 35px;
             border-radius: 25px; border: 1px solid var(--gold); overflow-y: auto;
-            max-height: 80vh; text-align: left; animation: modalIn 0.4s ease;
+            max-height: 85vh; text-align: left; animation: modalIn 0.4s ease;
         }
         @keyframes modalIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* Quiz Card Styling */
         .q-card { 
             background: rgba(0,0,0,0.03); padding: 18px; margin-bottom: 15px; 
             border-radius: 15px; text-align: left; border-left: 5px solid var(--gold);
@@ -70,9 +66,8 @@
         
         input {
             width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px;
-            outline: none; font-family: 'Poppins'; font-size: 0.9rem; transition: 0.3s;
+            outline: none; font-family: 'Poppins'; font-size: 0.9rem;
         }
-        input:focus { border-color: var(--gold); box-shadow: 0 0 5px rgba(212,175,55,0.3); }
 
         .timeline-card {
             background: white; border: 1px solid var(--gold); padding: 15px;
@@ -80,7 +75,6 @@
         }
         .timeline-card:hover { background: var(--pink-bg); transform: scale(1.02); }
 
-        /* Game Elements */
         .game-zone { height: 250px; position: relative; background: rgba(0,0,0,0.02); border-radius: 20px; overflow: hidden; margin: 20px 0; }
         #movingHeart { font-size: 50px; position: absolute; cursor: pointer; z-index: 20; transition: 0.15s linear; }
     </style>
@@ -91,8 +85,8 @@
 
 <div id="customModal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <h3 id="modalTitle" style="color:var(--gold); text-align:center; margin-bottom:15px;"></h3>
-        <div id="modalBody" style="line-height:1.8; color:#444;"></div>
+        <h3 id="modalTitle" style="color:var(--gold); text-align:center; margin-bottom:15px; font-family:'Playfair Display';"></h3>
+        <div id="modalBody" style="line-height:1.8; color:#444; font-size: 0.95rem;"></div>
         <center><button class="btn" style="margin-top:20px;" onclick="closeModal()">Close</button></center>
     </div>
 </div>
@@ -101,140 +95,35 @@
     
     <div id="page1" class="page active">
         <h1>Welcome</h1>
-        <p style="color: #888; font-style: italic;">Accessing private server...</p>
         <button class="btn" onclick="goToPage(2)">Continue</button>
-    </div>
-
-    <div id="page2" class="page">
-        <h2 style="color: #c0392b;">⚠️ Security Alert</h2>
-        <p>Unauthorized entry detected. Please confirm your identity to proceed or exit immediately.</p>
-        <button class="btn" onclick="goToPage(5)">Yes, I’m authorized</button>
-        <button id="exitBtn" class="btn" style="background:#444;" onmouseover="moveExitBtn()" onclick="handleExitClick()">No, exit now</button>
-    </div>
-
-    <div id="page3" class="page">
-        <h2 style="color: #c0392b;">CRITICAL ERROR</h2>
-        <p>System breach detected during exit. Sequence reset. Please restart the verification.</p>
-        <button class="btn" onclick="goToPage(1)">Try Again</button>
-    </div>
-
-    <div id="page4" class="page">
-        <h2 style="color: var(--gold);">Final Exit Verification</h2>
-        <p>Leaving is not an option until you prove who you are. Answer all 7 questions to unlock the exit button.</p>
-        <button class="btn" onclick="goToPage(6)">Start Verification</button>
-    </div>
-
-    <div id="page5" class="page">
-        <h2>Identity Check</h2>
-        <p>Identify the person who directed you to this portal:</p>
-        <input type="text" id="refInput" placeholder="Enter Full Name...">
-        <button class="btn" onclick="verifyReferrer()">Verify Access</button>
-    </div>
-
-    <div id="page5b" class="page">
-        <h2 style="color: #27ae60;">Access Granted ✔️</h2>
-        <p>Identity confirmed. This system was built exclusively for you.</p>
-        <button class="btn" onclick="goToPage(8)">Proceed to Memories</button>
-        <button class="btn" onclick="goToPage(7)">Continue Journey</button>
     </div>
 
     <div id="page6" class="page">
         <h3>Security Clearance</h3>
         <div id="qList">
-            <div class="q-card">
-                <p>1. What is the Referrer's full name?</p>
-                <input type="text" class="quiz-q" data-ans='["hamza malik", "mir hamza malik"]'>
-            </div>
-            <div class="q-card">
-                <p>2. Where did you first meet? (Enter Game Name)</p>
-                <input type="text" class="quiz-q" data-ans='["game", "homescapes", "gangster", "gangster team"]'>
-            </div>
-            <div class="q-card">
-                <p>3. What is the Referrer's birth month? (MM)</p>
-                <input type="text" class="quiz-q" data-ans='["11"]'>
-            </div>
-            <div class="q-card">
-                <p>4. On which day did the security breach happen? (17 June)</p>
-                <input type="text" class="quiz-q" data-ans='["17", "17 june"]'>
-            </div>
-            <div class="q-card">
-                <p>5. What food item does the Referrer hate the most?</p>
-                <input type="text" class="quiz-q" data-ans='["kaleji"]'>
-            </div>
-            <div class="q-card">
-                <p>6. What is the special nickname he uses for you?</p>
-                <input type="text" class="quiz-q" data-ans='["gudiya", "gudia"]'>
-            </div>
-            <div class="q-card">
-                <p>7. What is the 4-digit secret unlock code? (Hint: 2006)</p>
-                <input type="text" class="quiz-q" data-ans='["2006"]'>
-            </div>
+            <div class="q-card"><p>1. What is the Referrer's full name?</p><input type="text" class="quiz-q" data-ans='["hamza malik", "mir hamza malik"]'></div>
+            <div class="q-card"><p>2. Where did you first meet?</p><input type="text" class="quiz-q" data-ans='["game", "homescapes", "gangster", "gangster team"]'></div>
+            <div class="q-card"><p>3. What is the Referrer's birth month?</p><input type="text" class="quiz-q" data-ans='["11", "november"]'></div>
+            <div class="q-card"><p>4. On which day did the security breach happen?</p><input type="text" class="quiz-q" data-ans='["17", "17 june"]'></div>
+            <div class="q-card"><p>5. What food item does the Referrer hate the most?</p><input type="text" class="quiz-q" data-ans='["kaleji"]'></div>
+            <div class="q-card"><p>6. What is the special nickname he uses for you?</p><input type="text" class="quiz-q" data-ans='["gudiya", "gudia"]'></div>
+            <div class="q-card"><p>7. What is the 4-digit secret unlock code?</p><input type="text" class="quiz-q" data-ans='["2006"]'></div>
         </div>
         <button class="btn" onclick="validateQuiz()">Submit Verification</button>
-        <button class="btn" style="background:#888;" onclick="goToPage(1)">Main Page</button>
-    </div>
-
-    <div id="page7" class="page">
-        <h2>⚠ Emotional Firewall</h2>
-        <p>Warning: Proceeding beyond this point will result in extreme happiness and attachment.</p>
-        <button class="btn" onclick="goToPage(10)">I accept the risk</button>
-        <button class="btn" style="background:#555;" onmouseover="this.style.transform='translateX('+Math.random()*20+'px)'">Abort</button>
-    </div>
-
-    <div id="page8" class="page">
-        <h2>Memory Layer</h2>
-        <div class="timeline-card" onclick="showModal('First Connection', 'Some connections don’t start with meetings… they start with time.')">🃏 Card 1 — The Beginning</div>
-        <div class="timeline-card" onclick="showModal('The Special Name', 'Gudiya — A name that carries more meaning than a password ever could.')">🃏 Card 2 — Your Identity</div>
-        <div class="timeline-card" onclick="showModal('The Choice', 'Not everyone stays. But those who do, change everything.')">🃏 Card 3 — Consistency</div>
-        <button class="btn" onclick="goToPage(9)">Next Step</button>
-    </div>
-
-    <div id="page9" class="page">
-        <h2>Find the True Signal</h2>
-        <p>Only one signal leads to the heart of the system.</p>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(false)">S-1</button>
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(true)">S-2</button>
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(false)">S-3</button>
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(false)">S-4</button>
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(false)">S-5</button>
-            <button class="btn" style="background:#eee; color:#333;" onclick="signalGame(false)">S-6</button>
-        </div>
-    </div>
-
-    <div id="page10" class="page">
-        <h2>Message Incoming</h2>
-        <p>“Some people don’t say much. But when they choose someone… they choose deeply.”</p>
-        <div style="font-size: 60px; margin: 20px;">✉️</div>
-        <button class="btn" onclick="goToPage(11)">Open Secure Message</button>
-    </div>
-
-    <div id="page11" class="page">
-        <p style="font-style: italic;">“If you’re reading this… then the system worked.”</p>
-        <div class="game-zone">
-            <div id="movingHeart" onclick="catchHeart()">❤️</div>
-        </div>
-        <p id="hintText">Catch the heart to unlock the week...</p>
-        <button id="nextWeekBtn" class="btn" style="display:none;" onclick="goToPage(12)">Unlock Valentine Week</button>
-    </div>
-
-    <div id="page12" class="page">
-        <h2>Valentine Week</h2>
-        <div class="timeline-card" onclick="showModal('Rose Day', 'A rose doesn’t ask to be chosen. It just blooms. Just like you.')">🌹 Rose Day</div>
-        <div class="timeline-card" onclick="showModal('Propose Day', 'This isn’t a question. It’s an understanding. 💛')">💛 Propose Day</div>
-        <div class="timeline-card" onclick="showModal('Chocolate Day', 'Sweet things leave lasting feelings. Always.')">🍫 Chocolate Day</div>
-        <div class="timeline-card" onclick="showModal('Teddy Day', 'Some comfort just needs presence. No words.')">🧸 Teddy Day</div>
-        <div class="timeline-card" onclick="showModal('Promise Day', 'Promises are about honesty… today and every day.')">💌 Promise Day</div>
-        <div class="timeline-card" style="opacity:0.5;">🔒 Hug Day (Locked)</div>
-        <div class="timeline-card" style="opacity:0.5;">🔒 Kiss Day (Locked)</div>
-        <button class="btn" onclick="goToPage(14)">The Final Reveal</button>
     </div>
 
     <div id="page14" class="page">
-        <h1>Happy Valentine's Day</h1>
-        <p>“You’re the reason this entire journey was created.”</p>
-        <button class="btn" onclick="revealSpecialMessage()">❤️ View Special Message</button>
+        <h1 style="color: var(--gold);">Happy Valentine's Day</h1>
+        <p style="font-family: 'Playfair Display'; font-style: italic;">"Not all messages are meant for the world. Some exist only for one person."</p>
+        <button class="btn" onclick="revealSpecialMessage()">❤️ A Special Message For You</button>
     </div>
+
+    <div id="page2" class="page"><h2>⚠️ Security Alert</h2><button class="btn" onclick="goToPage(5)">Yes, I’m authorized</button><button id="exitBtn" class="btn" onmouseover="moveExitBtn()" onclick="handleExitClick()">No, exit now</button></div>
+    <div id="page5" class="page"><h2>Identity Check</h2><input type="text" id="refInput" placeholder="Enter Full Name..."><button class="btn" onclick="verifyReferrer()">Verify Access</button></div>
+    <div id="page5b" class="page"><h2 style="color: #27ae60;">Access Granted ✔️</h2><button class="btn" onclick="goToPage(8)">Proceed</button></div>
+    <div id="page8" class="page"><h2>Memories</h2><div class="timeline-card" onclick="showModal('Story', 'Some connections start with time.')">🃏 Card 1</div><button class="btn" onclick="goToPage(11)">Next</button></div>
+    <div id="page11" class="page"><div class="game-zone"><div id="movingHeart" onclick="catchHeart()">❤️</div></div><button id="nextWeekBtn" class="btn" style="display:none;" onclick="goToPage(12)">Unlock Week</button></div>
+    <div id="page12" class="page"><h2>Valentine Week</h2><div class="timeline-card" onclick="showModal('Rose Day', 'A rose just blooms.')">🌹 Rose Day</div><button class="btn" onclick="goToPage(14)">Final Message</button></div>
 
 </div>
 
@@ -243,15 +132,12 @@
     let exitClickCount = 0;
     let totalErrorCycles = 0;
 
-    // PAGE NAVIGATION
     function goToPage(p) {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-        const target = document.getElementById('page' + p);
-        if(target) target.classList.add('active');
+        document.getElementById('page' + p).classList.add('active');
         if(p === 11) startHeartGame();
     }
 
-    // MODAL SYSTEM
     function showModal(title, body) {
         document.getElementById('modalTitle').innerText = title;
         document.getElementById('modalBody').innerHTML = body;
@@ -259,60 +145,23 @@
     }
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
 
-    // SECURITY PRANK
-    function moveExitBtn() {
-        const btn = document.getElementById('exitBtn');
-        const container = document.querySelector('.container');
-        const maxX = (container.clientWidth / 2) - 50;
-        const maxY = (container.clientHeight / 2) - 50;
-        btn.style.transform = `translate(${Math.random() * maxX * 2 - maxX}px, ${Math.random() * maxY * 2 - maxY}px)`;
-    }
-
-    function handleExitClick() {
-        exitClickCount++;
-        if(exitClickCount >= 10) {
-            totalErrorCycles++;
-            exitClickCount = 0;
-            if(totalErrorCycles >= 3) goToPage(4);
-            else goToPage(3);
-        }
-    }
-
-    // AUTH & QUIZ LOGIC
-    function verifyReferrer() {
-        const val = document.getElementById('refInput').value.toLowerCase().trim();
-        if(val.includes('hamza')) goToPage('5b');
-        else showModal('Denied', 'Referrer not recognized. Access Restricted.');
-    }
-
     function validateQuiz() {
         let inputs = document.querySelectorAll('.quiz-q');
         let correctCount = 0;
-
         inputs.forEach(input => {
             let userAns = input.value.toLowerCase().trim();
             let validAnswers = JSON.parse(input.getAttribute('data-ans'));
-            
-            if(validAnswers.includes(userAns)) {
-                input.style.borderColor = "#27ae60";
-                correctCount++;
-            } else {
-                input.style.borderColor = "#c0392b";
-            }
+            if(validAnswers.includes(userAns)) { input.style.borderColor = "#27ae60"; correctCount++; }
+            else { input.style.borderColor = "#c0392b"; }
         });
-
-        if(correctCount === 7) {
-            alert("Verification Success. Escape sequence initiated...");
-            window.close();
-        } else {
-            showModal('Verification Failed', 'Some answers are incorrect. You are still locked in the system.');
-        }
+        if(correctCount === 7) { alert("Success."); window.close(); }
+        else { showModal('Access Denied', 'Answers incorrect.'); }
     }
 
-    // GAMES
-    function signalGame(isCorrect) {
-        if(isCorrect) goToPage(11);
-        else showModal('Signal Error', 'False signal. Connection lost.');
+    function verifyReferrer() {
+        const val = document.getElementById('refInput').value.toLowerCase().trim();
+        if(val.includes('hamza')) goToPage('5b');
+        else showModal('Denied', 'Referrer not recognized.');
     }
 
     function startHeartGame() {
@@ -324,12 +173,28 @@
     }
 
     function catchHeart() {
-        document.getElementById('hintText').innerHTML = "<b>Heart Signal Captured!</b>";
         document.getElementById('nextWeekBtn').style.display = 'inline-block';
-        showModal('Sync Success', '“You didn’t chase. You waited. That is why it stayed.”');
+        showModal('Success', 'You caught the signal.');
     }
 
-    // FINAL MESSAGE
+    function moveExitBtn() {
+        const btn = document.getElementById('exitBtn');
+        btn.style.position = 'absolute';
+        btn.style.left = Math.random() * 70 + '%';
+        btn.style.top = Math.random() * 70 + '%';
+    }
+
+    function handleExitClick() {
+        exitClickCount++;
+        if(exitClickCount >= 5) {
+            totalErrorCycles++;
+            exitClickCount = 0;
+            if(totalErrorCycles >= 2) goToPage(6);
+            else goToPage(1);
+        }
+    }
+
+    // YEH HAI AAPKA ASLI MESSAGE JO AAPNE LIKHA THA
     function revealSpecialMessage() {
         const msg = `
             “You’re not just anyone… you’re important.” 💛 <br><br>
@@ -340,20 +205,11 @@
             “And if it worked… then I’ve done exactly what I wanted.” <br><br>
             “Thank you for being the reason this exists.” ✨
         `;
-        showModal('To My Gudiya', msg);
+        showModal('For You', msg);
     }
 
-    // PARTICLES
-    particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 50 },
-            "shape": { "type": "heart" },
-            "color": { "value": "#d4af37" },
-            "opacity": { "value": 0.3 },
-            "size": { "value": 4 },
-            "move": { "enable": true, "speed": 1 }
-        }
-    });
+    particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "shape": { "type": "heart" }, "color": { "value": "#d4af37" }, "move": { "enable": true, "speed": 1 } } });
 </script>
 </body>
-    </html>
+                                                                                                                                                               </html>
+    
